@@ -1,18 +1,45 @@
-appimage:
-  repository: tcollins520/vprofileapp
+defaultUser: guest
+app:
+  image: tcollins520/vprofileapp
   tag: latest
-
-replicaCount: 1
-
-ingress:
-  host: vproappgitopsargocd.tcapp.xyz
-
+  replicas: 1
+  containerPort: 8080
+  servicePort: 8080
 db:
-  image: tcollins520/vprofiledb:latest
-  storage: 3Gi
-
+  image: tcollins520/vprofiledb
+  tag: latest
+  replicas: 1
+  containerPort: 3306
+  servicePort: 3306
+  storageClass: gp3
+  storageSize: 3Gi
 memcached:
-  image: memcached:latest
-
+  image: memcached
+  tag: latest
+  replicas: 1
+  containerPort: 11211
+  servicePort: 11211
 rabbitmq:
-  image: rabbitmq:3-management
+  image: rabbitmq
+  tag: latest
+  replicas: 1
+  containerPort: 5672
+  servicePort: 5672
+initcontainers:
+  image: busybox
+  command:
+    - sh
+    - -c
+ingress:
+  enabled: true
+  host: vproappgitopsargocd.tcapp.xyz
+  servicePort: 8080
+secrets:
+  dbPassword: vprodbpass
+  rmqPassword: guest
+dockerregistry:
+  enabled: false
+  server: ""
+  username: ""
+  password: ""
+  email: ""
