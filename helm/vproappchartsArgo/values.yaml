@@ -1,0 +1,18 @@
+appimage:
+  repository: tcollins520/vprofileapp
+  tag: latest
+
+replicaCount: 1
+
+ingress:
+  host: vproappgitopsargocd.tcapp.xyz
+
+db:
+  image: tcollins520/vprofiledb:latest
+  storage: 3Gi
+
+memcached:
+  image: memcached:latest
+
+rabbitmq:
+  image: rabbitmq:3-management
