@@ -1,8 +1,7 @@
 defaultUser: guest
-
 app:
   image: 788143860357.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg
-  tag: 161e1ed
+  tag: 3d0d8cf
   replicas: 1
   containerPort: 8080
   servicePort: 8080
@@ -13,7 +12,6 @@ app:
     limits:
       memory: "512Mi"
       cpu: "200m"
-
 db:
   image: tcollins520/vprofiledb
   tag: latest
@@ -22,36 +20,30 @@ db:
   servicePort: 3306
   storageClass: gp2
   storageSize: 3Gi
-
 memcached:
   image: memcached
   tag: latest
   replicas: 1
   containerPort: 11211
   servicePort: 11211
-
 rabbitmq:
   image: rabbitmq
   tag: latest
   replicas: 1
   containerPort: 5672
   servicePort: 5672
-
 initcontainers:
   image: busybox
   command:
     - sh
     - -c
-
 ingress:
   enabled: true
   host: vproappgitopsargocd.tcapp.xyz
   servicePort: 8080
-
 secrets:
   dbPassword: vprodbpass
   rmqPassword: guest
-
 dockerregistry:
   enabled: false
   server: ""
