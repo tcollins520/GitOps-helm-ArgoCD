@@ -5,7 +5,7 @@ metadata:
   labels:
     app: vprodb
 spec:
-  storageClassName: gp3
+  storageClassName: gp2
   accessModes:
     - ReadWriteOnce
   resources:
